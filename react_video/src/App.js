@@ -1,22 +1,31 @@
 import React from 'react';
 import './App.css';
+import videos from './database.json'
+
+function VideoList({ videos }) {
+  return (
+    videos.map((element, index) =>
+      <Video key={index} video={element} />)
+  )
+}
+
+function Video({ video }) {
+  return (
+    <div className="element">
+      <div>
+        <h2>{video.title}</h2>
+        <h4>{video.description}</h4>
+      </div>
+      <iframe title={video.title} style={{ width: "560", height: "315" }}
+        src={video.video_url} frameBorder="0"></iframe>
+    </div>
+  )
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <VideoList videos={videos} />
     </div>
   );
 }
